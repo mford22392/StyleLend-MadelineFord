@@ -17,8 +17,8 @@ ActiveRecord::Schema.define(version: 20160118212921) do
   enable_extension "plpgsql"
 
   create_table "resizers", force: :cascade do |t|
-    t.text     "image_dimensions",              array: true
-    t.text     "bounding_box",                  array: true
+    t.string   "image_dimensions"
+    t.string   "bounding_box"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

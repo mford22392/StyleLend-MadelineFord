@@ -13,9 +13,12 @@ class Resizer < ActiveRecord::Base
   end
 
   def collect_data
-    @sets_of_dimensions = self.image_dimensions.each_slice(2).to_a
-    @bounding_box_width = bounding_box[0].to_f
-    @bounding_box_height = bounding_box[1].to_f
+    array_image_dimensions = JSON.parse(self.image_dimensions)
+    array_bounding_box = JSON.parse(self.bounding_box)
+
+    @sets_of_dimensions = array_image_dimensions.each_slice(2).to_a
+    @bounding_box_width = array_bounding_box[0].to_f
+    @bounding_box_height = array_bounding_box[1].to_f
   end
 
   def scale(dimensions)
@@ -39,6 +42,5 @@ class Resizer < ActiveRecord::Base
 
     [new_width.to_i, new_height.to_i]
   end
-
 
 end
