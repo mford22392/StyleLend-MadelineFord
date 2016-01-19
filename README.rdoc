@@ -1,31 +1,27 @@
-== README
+# README
 
-This API allows a user to make a request with an array of image dimensions ([w,h]) and a bounding box dimension ([w,h]) and receive back scaled image dimensions.
+This API allows a user to make a request with an array of image dimensions ([w,h]) and a bounding box dimension ([w,h]) and receive back scaled image dimensions. It can handle multiple sets of image dimensions to be scaled in the format [w,h,w,h,w,h], etc. See below for example usage:
 
-=> Scaling image dimensions
-url: URL HERE
-method: GET
-request arguments: 
+**Scaling Image Dimensions**
 
-image_dimensions - required, a one-dimensional array of image dimensions to be scaled
-bounding_box - required, a one-dimensional array of one set of dimensions
+* URL: https://mfstylelend.herokuapp.com/api/v1/resizers
+
+* Method: GET
+* Request Arguments: 
+
+  * *image_dimensions* - required - a one-dimensional array of image dimensions to be scaled
+
+  * *bounding_box* - required - a one-dimensional array of one set of dimensions
 
 
-EXAMPLE REQUEST: GET
+**Example Request:**
 
-url: http://localhost:3000/api/v1/resizers?image_dimensions=[1256,1200,%20600,%20800,%20200,%20200,%20400,%20200,%20800,1256]&bounding_box=[200,200]
+URL: 
+
+    https://mfstylelend.herokuapp.com/api/v1/resizers?image_dimensions=[1256,1200,600,800,200,200,400,200,800,1256]&bounding_box=[200,200]
 
 
 RESPONSE:
 
-{
-  scaled_dimensions: [200, 191, 150, 200, 200, 200, 200, 100, 127, 200],
-  bounding_box: [200,200]
-}
-
-
-
-
-
-
-
+    {scaled_dimensions: [200, 191, 150, 200, 200, 200, 200,100, 127, 200], 
+    bounding_box: [200,200]}
