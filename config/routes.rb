@@ -5,5 +5,7 @@ Rails.application.routes.draw do
       
     end
   end
+
+  match "*path", :to => "application#routing_error", :via => :all
   
 end
