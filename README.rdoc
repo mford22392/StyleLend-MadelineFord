@@ -1,28 +1,31 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This API allows a user to make a request with an array of image dimensions ([w,h]) and a bounding box dimension ([w,h]) and receive back scaled image dimensions.
 
-Things you may want to cover:
+=> Scaling image dimensions
+url: URL HERE
+method: GET
+request arguments: 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+image_dimensions - required, a one-dimensional array of image dimensions to be scaled
+bounding_box - required, a one-dimensional array of one set of dimensions
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+EXAMPLE REQUEST: GET
+
+url: http://localhost:3000/api/v1/resizers?image_dimensions=[1256,1200,%20600,%20800,%20200,%20200,%20400,%20200,%20800,1256]&bounding_box=[200,200]
+
+
+RESPONSE:
+
+{
+  scaled_dimensions: [200, 191, 150, 200, 200, 200, 200, 100, 127, 200],
+  bounding_box: [200,200]
+}
+
+
+
+
+
+
+
