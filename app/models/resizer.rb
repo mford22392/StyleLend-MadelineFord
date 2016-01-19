@@ -5,13 +5,15 @@ class Resizer < ActiveRecord::Base
   def new_dimensions
     collect_data
 
-    new_dimensions = @sets_of_dimensions.each_with_object([]) do |set, array|
+    @sets_of_dimensions.each_with_object([]) do |set, array|
       array << self.scale(set)
-    end
-    new_dimensions.flatten!
+    end.flatten!
+
   end
 
   def collect_data
+    # Creates an array of arrays containing the sets of image dimensions and sets the bounding box width and height as instance variables: 
+    
     array_image_dimensions = JSON.parse(self.image_dimensions)
     array_bounding_box = JSON.parse(self.bounding_box)
 
@@ -24,11 +26,17 @@ class Resizer < ActiveRecord::Base
     old_width = dimensions[0].to_f
     old_height = dimensions[1].to_f
 
+    # First, determine what the scaled height would be based on bounding box width
+
     ratio_by_width = old_width/@bounding_box_width
     scaled_height = old_height/ratio_by_width
 
+    # and what the scaled width would be based on bounding box height.
+
     ratio_by_height = old_height/@bounding_box_height
     scaled_width = old_width/ratio_by_height
+
+    # If the scaled height is too big for the bounding box, you know the new height is the bounding box height and the new width is the scaled width calculated above, and vice versa:  
 
     if scaled_height > @bounding_box_height
       new_width = scaled_width
