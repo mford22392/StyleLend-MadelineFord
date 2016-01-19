@@ -16,17 +16,14 @@ class ApplicationController < ActionController::Base
 
 
   def error(e)
-    # if env["ORIGINAL_FULLPATH"] =~ /^\/api/
     error_info = {
       :error => "internal-server-error",
-      :exception => "#{e.class.name} : #{e.message}",
+      :exception => "#{e.class.name}",
+      :notice => "ensure your request is in the format https://mfstylelend.herokuapp.com/api/v1/resizers?image_dimensions=[w,h]&bounding_box=[w,h]"
     }
     error_info[:trace] = e.backtrace[0,10] if Rails.env.development?
     render :json => error_info.to_json, :status => 500
-    # else
-    #   #render :text => "500 Internal Server Error", :status => 500 # You can render your own template here
-    #   raise e
-    # end
+
   end
 
 end
