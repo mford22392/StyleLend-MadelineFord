@@ -1,4 +1,3 @@
-require 'pry'
 class Resizer < ActiveRecord::Base
 
   attr_accessor :sets_of_dimensions, :bounding_box_width, :bounding_box_height
@@ -22,7 +21,6 @@ class Resizer < ActiveRecord::Base
   end
 
   def scale(dimensions)
-    # binding.pry
     old_width = dimensions[0].to_f
     old_height = dimensions[1].to_f
 
